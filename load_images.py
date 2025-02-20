@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
-from numpy.lib.type_check import imag
+# from numpy.lib.type_check import imag
+from numpy.lib._type_check_impl import imag
 from imageio import imread
 import numpy as np
 import cv2
@@ -25,7 +26,7 @@ def default_preprocess_image(image):
     output_frame_size = 96   # do not change the output frame size!
     image = cv2.equalizeHist(image)
     image = cv2.GaussianBlur(image, (5, 5), 0)
-    im = cv2.resize(image, (output_frame_size, output_frame_size)).astype(np.float)
+    im = cv2.resize(image, (output_frame_size, output_frame_size)).astype(float)  # NB : np.float is deprecated
     im -= im.mean()
     im /= im.max()
     image = im
